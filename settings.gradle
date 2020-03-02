@@ -1,4 +1,5 @@
 rootProject.name = 'AntlrNote'
 include 'Hello'
 include 'Base'
+include 'ArrayInit'
 
