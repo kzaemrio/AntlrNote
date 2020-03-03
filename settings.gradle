@@ -4,4 +4,5 @@ include 'Base'
 include 'ArrayInit'
 include 'Expr'
 include 'LibExpr'
+include 'LabeledExpr'
 
