@@ -5,3 +5,5 @@ include 'ArrayInit'
 include 'Expr'
 include 'LibExpr'
 include 'LabeledExpr'
+include 'ExtractInterface'
+
