@@ -7,4 +7,5 @@ include 'LibExpr'
 include 'LabeledExpr'
 include 'ExtractInterface'
 include 'CsvParser'
+include 'JsonToXml'
 
