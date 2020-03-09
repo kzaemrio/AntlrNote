@@ -53,3 +53,5 @@ build/
 
 # Version control
 vcs.xml
+
+.DS_Store
