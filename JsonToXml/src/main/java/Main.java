@@ -1,7 +1,4 @@
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.ParseTreeProperty;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.*;
 
 import java.io.IOException;
 
@@ -13,9 +10,72 @@ public class Main {
                 JsonParser::new
         );
         ParseTree tree = parser.json();
+        printByListener(tree);
+        printByVisitor(tree);
+    }
+
+    private static void printByVisitor(ParseTree tree) {
+        System.out.println(visitor().visit(tree));
+    }
+
+    private static void printByListener(ParseTree tree) {
         Wrapper wrapper = Wrapper.create();
-        ParseTreeWalker.DEFAULT.walk(listener(wrapper), tree);
+        new ParseTreeWalker().walk(listener(wrapper), tree);
         System.out.println(wrapper.getXml(tree));
+    }
+
+    private static ParseTreeVisitor<String> visitor() {
+        return new JsonBaseVisitor<String>() {
+            @Override
+            public String visitAtom(JsonParser.AtomContext ctx) {
+                return ctx.getText();
+            }
+
+            @Override
+            public String visitString(JsonParser.StringContext ctx) {
+                return stripQuotes(ctx.getText());
+            }
+
+            @Override
+            public String visitAnObject(JsonParser.AnObjectContext ctx) {
+                StringBuilder builder = new StringBuilder();
+                for (JsonParser.PairContext context : ctx.pair()) {
+                    builder.append(visit(context));
+                }
+                return builder.toString();
+            }
+
+            @Override
+            public String visitEmptyObject(JsonParser.EmptyObjectContext ctx) {
+                return "";
+            }
+
+            @Override
+            public String visitArrayOfValues(JsonParser.ArrayOfValuesContext ctx) {
+                StringBuilder builder = new StringBuilder();
+                for (JsonParser.ValueContext context : ctx.value()) {
+                    builder.append("<element>");
+                    builder.append(visit(context));
+                    builder.append("</element>");
+                }
+                return builder.toString();
+            }
+
+            @Override
+            public String visitEmptyArray(JsonParser.EmptyArrayContext ctx) {
+                return "";
+            }
+
+            @Override
+            public String visitPair(JsonParser.PairContext ctx) {
+                String tag = stripQuotes(ctx.STRING().getText());
+                return String.format("<%s>%s</%s>", tag, visit(ctx.value()), tag);
+            }
+
+            private String stripQuotes(String text) {
+                return text.replace("\"", "");
+            }
+        };
     }
 
     private static ParseTreeListener listener(Wrapper wrapper) {
@@ -52,7 +112,6 @@ public class Main {
             public void exitAnObject(JsonParser.AnObjectContext ctx) {
                 super.exitAnObject(ctx);
                 StringBuilder builder = new StringBuilder();
-                builder.append("\n");
                 for (JsonParser.PairContext context : ctx.pair()) {
                     builder.append(wrapper.getXml(context));
                 }
@@ -71,7 +130,6 @@ public class Main {
                 StringBuilder builder = new StringBuilder();
                 for (ParseTree child : ctx.children) {
                     builder.append(wrapper.getXml(child));
-                    builder.append("\n");
                 }
                 wrapper.setXml(ctx, builder.toString());
             }
@@ -80,12 +138,10 @@ public class Main {
             public void exitArrayOfValues(JsonParser.ArrayOfValuesContext ctx) {
                 super.exitArrayOfValues(ctx);
                 StringBuilder builder = new StringBuilder();
-                builder.append("\n");
                 for (JsonParser.ValueContext context : ctx.value()) {
                     builder.append("<element>");
                     builder.append(wrapper.getXml(context));
                     builder.append("</element>");
-                    builder.append("\n");
                 }
                 wrapper.setXml(ctx, builder.toString());
             }
