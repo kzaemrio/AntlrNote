@@ -27,4 +27,16 @@ public interface LibExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpr(LibExprParser.ExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibExprParser#term}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm(LibExprParser.TermContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibExprParser#factor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFactor(LibExprParser.FactorContext ctx);
 }

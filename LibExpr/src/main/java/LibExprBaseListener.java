@@ -46,6 +46,30 @@ public class LibExprBaseListener implements LibExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpr(LibExprParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTerm(LibExprParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTerm(LibExprParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFactor(LibExprParser.FactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFactor(LibExprParser.FactorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

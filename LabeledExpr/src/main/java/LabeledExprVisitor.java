@@ -37,52 +37,66 @@ public interface LabeledExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlank(LabeledExprParser.BlankContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Div}
-	 * labeled alternative in {@link LabeledExprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDiv(LabeledExprParser.DivContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Add}
+	 * Visit a parse tree produced by the {@code add}
 	 * labeled alternative in {@link LabeledExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAdd(LabeledExprParser.AddContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Sub}
+	 * Visit a parse tree produced by the {@code sub}
 	 * labeled alternative in {@link LabeledExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSub(LabeledExprParser.SubContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code parens}
+	 * Visit a parse tree produced by the {@code termValue}
 	 * labeled alternative in {@link LabeledExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParens(LabeledExprParser.ParensContext ctx);
+	T visitTermValue(LabeledExprParser.TermValueContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Mul}
-	 * labeled alternative in {@link LabeledExprParser#expr}.
+	 * Visit a parse tree produced by the {@code div}
+	 * labeled alternative in {@link LabeledExprParser#term}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDiv(LabeledExprParser.DivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mul}
+	 * labeled alternative in {@link LabeledExprParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMul(LabeledExprParser.MulContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code id}
-	 * labeled alternative in {@link LabeledExprParser#expr}.
+	 * Visit a parse tree produced by the {@code factorValue}
+	 * labeled alternative in {@link LabeledExprParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitId(LabeledExprParser.IdContext ctx);
+	T visitFactorValue(LabeledExprParser.FactorValueContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code par}
+	 * labeled alternative in {@link LabeledExprParser#factor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPar(LabeledExprParser.ParContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code int}
-	 * labeled alternative in {@link LabeledExprParser#expr}.
+	 * labeled alternative in {@link LabeledExprParser#factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitInt(LabeledExprParser.IntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code id}
+	 * labeled alternative in {@link LabeledExprParser#factor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitId(LabeledExprParser.IdContext ctx);
 }

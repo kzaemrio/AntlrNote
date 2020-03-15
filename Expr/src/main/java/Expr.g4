@@ -7,14 +7,30 @@ stat: expr NEWLINE
     | NEWLINE
     ;
 
-expr: expr ('*' | '/') expr
-    | expr ('+' | '-') expr
-    | INT
-    | ID
-    | '(' expr ')'
+expr: expr ADD term
+    | expr SUB term
+    | term
     ;
 
+term: term MUL factor
+    | term DIV factor
+    | factor
+    ;
+
+factor: '(' expr ')'
+    | INT
+    | ID
+    ;
+
+MUL : '*' ;
+DIV : '/' ;
+ADD : '+' ;
+SUB : '-' ;
+
 ID : [a-zA-Z]+ ;
+
 INT : [0-9]+ ;
+
 NEWLINE : '\r'? '\n' ;
+
 WS : [ \t]+ -> skip;

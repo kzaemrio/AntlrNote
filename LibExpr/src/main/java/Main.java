@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         LibExprParser parser = Antlr.parserFile(
-                "Expr/src/main/java/Input.expr",
+                "LibExpr/src/main/java/Input.expr",
                 LibExprLexer::new,
                 LibExprParser::new
         );

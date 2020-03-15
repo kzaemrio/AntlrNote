@@ -8,7 +8,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) throws IOException {
         LabeledExprParser parser = Antlr.parserFile(
-                "Expr/src/main/java/Input.expr",
+                "LabeledExpr/src/main/java/Input.expr",
                 LabeledExprLexer::new,
                 LabeledExprParser::new
         );
@@ -47,34 +47,26 @@ public class Main {
 
             @Override
             public Integer visitMul(LabeledExprParser.MulContext ctx) {
-                Integer left = visit(ctx.expr(0));
-                Integer right = visit(ctx.expr(1));
-                return left * right;
+                return visit(ctx.term()) * visit(ctx.factor());
             }
 
             @Override
             public Integer visitDiv(LabeledExprParser.DivContext ctx) {
-                Integer left = visit(ctx.expr(0));
-                Integer right = visit(ctx.expr(1));
-                return left / right;
+                return visit(ctx.term()) / visit(ctx.factor());
             }
 
             @Override
             public Integer visitAdd(LabeledExprParser.AddContext ctx) {
-                Integer left = visit(ctx.expr(0));
-                Integer right = visit(ctx.expr(1));
-                return left + right;
+                return visit(ctx.expr()) + visit(ctx.term());
             }
 
             @Override
             public Integer visitSub(LabeledExprParser.SubContext ctx) {
-                Integer left = visit(ctx.expr(0));
-                Integer right = visit(ctx.expr(1));
-                return left - right;
+                return visit(ctx.expr()) - visit(ctx.term());
             }
 
             @Override
-            public Integer visitParens(LabeledExprParser.ParensContext ctx) {
+            public Integer visitPar(LabeledExprParser.ParContext ctx) {
                 return visit(ctx.expr());
             }
         };

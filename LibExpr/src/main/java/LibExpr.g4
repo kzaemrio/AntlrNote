@@ -8,9 +8,17 @@ stat : expr NEWLINE
     | NEWLINE
     ;
 
-expr: expr ('*' | '/') expr
-    | expr ('+' | '-') expr
+expr: expr ADD term
+    | expr SUB term
+    | term
+    ;
+
+term: term MUL factor
+    | term DIV factor
+    | factor
+    ;
+
+factor: '(' expr ')'
     | INT
     | ID
-    | '(' expr ')'
     ;

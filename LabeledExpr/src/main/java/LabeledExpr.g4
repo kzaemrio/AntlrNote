@@ -8,11 +8,17 @@ stat : expr NEWLINE #printExpr
     | NEWLINE #blank
     ;
 
-expr: expr '*' expr #Mul
-    | expr '/' expr #Div
-    | expr '+' expr #Add
-    | expr '-' expr #Sub
+expr: expr ADD term #add
+    | expr SUB term #sub
+    | term #termValue
+    ;
+
+term: term MUL factor #mul
+    | term DIV factor #div
+    | factor #factorValue
+    ;
+
+factor: '(' expr ')' #par
     | INT #int
     | ID #id
-    | '(' expr ')' #parens
     ;

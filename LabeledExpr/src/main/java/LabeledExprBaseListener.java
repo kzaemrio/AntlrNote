@@ -63,18 +63,6 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDiv(LabeledExprParser.DivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDiv(LabeledExprParser.DivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAdd(LabeledExprParser.AddContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -99,13 +87,25 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParens(LabeledExprParser.ParensContext ctx) { }
+	@Override public void enterTermValue(LabeledExprParser.TermValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParens(LabeledExprParser.ParensContext ctx) { }
+	@Override public void exitTermValue(LabeledExprParser.TermValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDiv(LabeledExprParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDiv(LabeledExprParser.DivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -123,13 +123,25 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId(LabeledExprParser.IdContext ctx) { }
+	@Override public void enterFactorValue(LabeledExprParser.FactorValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId(LabeledExprParser.IdContext ctx) { }
+	@Override public void exitFactorValue(LabeledExprParser.FactorValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPar(LabeledExprParser.ParContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPar(LabeledExprParser.ParContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -142,6 +154,18 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInt(LabeledExprParser.IntContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterId(LabeledExprParser.IdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitId(LabeledExprParser.IdContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
